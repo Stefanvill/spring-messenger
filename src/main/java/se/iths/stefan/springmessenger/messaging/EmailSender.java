@@ -21,6 +21,7 @@ public class EmailSender implements Messenger {
     private String from;
 
     @Override
+
     public void send(Message message) {
         if (!(message instanceof Email email)) throw new IllegalArgumentException("Expected Email");
         try {
