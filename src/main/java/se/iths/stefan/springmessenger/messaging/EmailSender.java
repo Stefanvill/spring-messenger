@@ -28,11 +28,11 @@ public class EmailSender implements Messenger {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, StandardCharsets.UTF_8.name());
 
             helper.setFrom(from);
-            helper.setTo(email.getRecipient());
+            helper.setTo(email.getCustomerName());
 
             StringBuilder body = new StringBuilder();
             body.append("Order date: ").append(email.getOrderDate()).append("\n");
-            body.append("Customer: ").append(email.getRecipient()).append("\n\n");
+            body.append("Customer: ").append(email.getCustomerName()).append("\n\n");
             body.append("Items:\n");
             double computed = 0;
             for (Product p : email.getProducts()) {
