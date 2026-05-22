@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public abstract class Message {
     private LocalDateTime orderDate;
-    private String recipient;
+    private String customerName;
     private List<Product> products = new ArrayList<>();
     private double totalPrice;   // use double for money (or BigDecimal for production)
 

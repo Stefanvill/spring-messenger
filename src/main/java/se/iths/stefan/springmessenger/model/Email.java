@@ -7,8 +7,6 @@ import lombok.Setter;
 @Setter
 public class Email extends Message {
 
-    private String message;
-
     @Override
     public String getType() {
         return "email";
