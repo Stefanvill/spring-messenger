@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import se.iths.stefan.springmessenger.model.Email;
-import se.iths.stefan.springmessenger.model.Message;
+import se.iths.stefan.springmessenger.model.Order;
 import se.iths.stefan.springmessenger.model.Product;
 
 import java.nio.charset.StandardCharsets;
@@ -22,7 +22,7 @@ public class EmailSender implements Messenger {
 
     @Override
 
-    public void send(Message message) {
+    public void send(Order message) {
         if (!(message instanceof Email email)) throw new IllegalArgumentException("Expected Email");
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -32,20 +32,12 @@ public class EmailSender implements Messenger {
             helper.setTo(email.getCustomerName());
 
             StringBuilder body = new StringBuilder();
-            body.append("Order date: ").append(email.getOrderDate()).append("\n");
             body.append("Customer: ").append(email.getCustomerName()).append("\n\n");
             body.append("Items:\n");
-            double computed = 0;
-            for (Product p : email.getProducts()) {
-                body.append("- ").append(p.getName()).append(" : ").append(p.getPrice()).append("\n");
-                computed += p.getPrice();
-            }
-            if (email.getProducts().isEmpty()) {
+
+            if (email.getOrderItems().isEmpty()) {
                 body.append("(no items)\n");
             }
-            double total = email.getTotalPrice();
-            if (total == 0) total = computed;
-            body.append("\nTotal: ").append(total).append(" kr\n");
 
             helper.setText(body.toString());
             mailSender.send(mimeMessage);

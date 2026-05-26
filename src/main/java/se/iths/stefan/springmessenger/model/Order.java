@@ -10,10 +10,9 @@ import java.util.List;
 // src/main/java/.../model/Message.java
 @Getter
 @Setter
-public abstract class Message {
-    private LocalDateTime orderDate;
+public abstract class Order {
     private String customerName;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> OrderItems = new ArrayList<>();
     private double totalPrice;   // use double for money (or BigDecimal for production)
 
     public abstract String getType();
