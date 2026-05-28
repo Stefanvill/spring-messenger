@@ -1,24 +1,17 @@
 package se.iths.stefan.springmessenger.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import se.iths.stefan.springmessenger.messaging.Messenger;
-import se.iths.stefan.springmessenger.model.Order;
-
-import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
-    private final Map<String, Messenger> messengers;
+    private final Messenger messenger;
 
-    public MessageService(Map<String, Messenger> messengers) {
-        this.messengers = messengers;
-    }
+    public void send(String message, String recipient) {
 
-    public void send(Order order) {
-        Messenger messenger = messengers.get(order.getType());
-        if (messenger == null) {
-            throw new IllegalArgumentException("No messenger for type: " + order.getType());
-        }
-        messenger.send(order);
+
+        messenger.send(message, recipient);
     }
 }

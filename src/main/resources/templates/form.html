@@ -11,8 +11,6 @@
 </div>
 
 <form method="post" th:action="@{/email}" th:object="${email}">
-    <input placeholder="mottagare" th:field="*{recipient}" type="text">
-    <textarea placeholder="meddelande" th:field="*{message}"></textarea>
     <button type="submit">Skicka</button>
 </form>
 
